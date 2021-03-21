@@ -22,10 +22,6 @@ namespace ServiceLigueHockey.Controllers
 
         // GET: api/EquipeBds
         [HttpGet]
-        /*public async Task<ActionResult<IEnumerable<EquipeBd>>> GetEquipeBd()
-        {
-            return await _context.EquipeBd.ToListAsync();
-        }*/
         public IQueryable<EquipeDto> GetEquipeDto()
         {
             var listeEquipe = from equipe in _context.Equipe
@@ -68,12 +64,22 @@ namespace ServiceLigueHockey.Controllers
         // PUT: api/EquipeBds/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEquipeBd(int id, EquipBd equipeBd)
+        public async Task<IActionResult> PutEquipeBd(int id, EquipeDto equipeDto)
         {
-            if (id != equipeBd.No_Equipe)
+            if (id != equipeDto.No_Equipe)
             {
                 return BadRequest();
             }
+
+            var equipeBd = new EquipBd
+            {
+                No_Equipe = equipeDto.No_Equipe,
+                Nom_Equipe = equipeDto.Nom_Equipe,
+                Ville = equipeDto.Ville,
+                Annee_debut = equipeDto.Annee_debut,
+                Annee_fin = equipeDto.Annee_fin,
+                Est_Devenue_Equipe = equipeDto.Est_Devenue_Equipe
+            };
 
             _context.Entry(equipeBd).State = EntityState.Modified;
 
@@ -99,13 +105,6 @@ namespace ServiceLigueHockey.Controllers
         // POST: api/EquipeBds
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        /*public async Task<ActionResult<EquipeBd>> PostEquipeBd(EquipeBd equipeBd)
-        {
-            _context.EquipeBd.Add(equipeBd);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEquipeBd", new { id = equipeBd.No_Equipe }, equipeBd);
-        }*/
         public async Task<ActionResult<EquipBd>> PostEquipeDto(EquipeDto equipe)
         {
             var equipeBd = new EquipBd
