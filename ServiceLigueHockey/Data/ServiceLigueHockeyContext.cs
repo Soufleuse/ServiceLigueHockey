@@ -16,6 +16,8 @@ namespace ServiceLigueHockey.Data
 
         public DbSet<JoueurBd> Joueur { get; set; }
 
+        public DbSet<equipe_joueurBd> equipe_joueur { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -38,6 +40,8 @@ namespace ServiceLigueHockey.Data
                 new EquipBd { No_Equipe = 6, Nom_Equipe = "Pierre", Ville = "Rochester", Annee_debut = 1986 }
                 );
 
+            modelBuilder.Entity<equipe_joueurBd>()
+                .HasKey(c => new { c.no_equipe, c.no_joueur, c.date_debut_avec_equipe });
             //modelBuilder.Entity<>
         }
     }
