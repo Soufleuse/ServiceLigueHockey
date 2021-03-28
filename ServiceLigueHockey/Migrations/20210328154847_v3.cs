@@ -3,7 +3,7 @@ using System;
 
 namespace ServiceLigueHockey.Migrations
 {
-    public partial class v1 : Migration
+    public partial class v3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,21 +45,21 @@ namespace ServiceLigueHockey.Migrations
                 {
                     No_Joueur = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Prenom = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    Nom = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    Date_naissance = table.Column<DateTime>(nullable: false),
+                    Prenom = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Nom = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Date_Naissance = table.Column<DateTime>(type: "Date", nullable: false),
                     Ville_naissance = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
                     Pays_origine = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Joueur", x => x.No_Joueur);
-                    table.UniqueConstraint("CU_Joueur", x => new { x.Prenom, x.Nom, x.Date_naissance });
+                    table.UniqueConstraint("CU_Joueur", x => new { x.Prenom, x.Nom, x.Date_Naissance });
                 });
 
             migrationBuilder.InsertData(
                 table: "Joueur",
-                columns: new[] { "No_Joueur", "Prenom", "Nom", "Date_naissance", "Ville_naissance", "Pays_origine" },
+                columns: new[] { "No_Joueur", "Prenom", "Nom", "Date_Naissance", "Ville_naissance", "Pays_origine" },
                 values: new object[,]
                 {
                     { 1, "Jack", "Tremblay", new DateTime(1988, 10, 20), "Lévis", "Canada" },

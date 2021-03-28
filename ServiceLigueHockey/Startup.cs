@@ -15,6 +15,8 @@ using ServiceLigueHockey.Models;
 using Microsoft.EntityFrameworkCore;
 using ServiceLigueHockey.Data;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using IBM.EntityFrameworkCore;
+using IBM.EntityFrameworkCore.Storage.Internal;
 
 namespace ServiceLigueHockey
 {
@@ -45,9 +47,12 @@ namespace ServiceLigueHockey
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ServiceLigueHockey", Version = "v1" });
             });*/
 
-            var connection = Configuration.GetConnectionString("ServiceLigueHockeyContext");
+            //var connection = Configuration.GetConnectionString("ServiceLigueHockeyContext");
+            //services.AddDbContext<ServiceLigueHockeyContext>(options =>
+            //        options.UseSqlServer(connection));
+            var connection = Configuration.GetConnectionString("ServiceLigueHockeyContextDb2");
             services.AddDbContext<ServiceLigueHockeyContext>(options =>
-                    options.UseSqlServer(connection));
+                    options.UseDb2(connection, p => p.SetServerInfo(IBMDBServerType.LUW, IBMDBServerVersion.LUW_11_01_2020)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
