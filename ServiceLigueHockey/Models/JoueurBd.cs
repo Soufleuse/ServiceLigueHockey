@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ServiceLigueHockey.Models
@@ -21,5 +22,7 @@ namespace ServiceLigueHockey.Models
         
         [MaxLength(50)]
         public string Pays_origine { get; set; }
+
+        public ICollection<equipe_joueurBd> listeEquipeJoueur { get; set; }
     }
 }

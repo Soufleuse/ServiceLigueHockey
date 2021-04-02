@@ -70,7 +70,7 @@ namespace ServiceLigueHockey.Controllers
                 return BadRequest();
             }
 
-            var equipeBd = new EquipBd
+            var equipeBd = new EquipeBd
             {
                 No_Equipe = equipeDto.No_Equipe,
                 Nom_Equipe = equipeDto.Nom_Equipe,
@@ -104,9 +104,9 @@ namespace ServiceLigueHockey.Controllers
         // POST: api/EquipeBds
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<EquipBd>> PostEquipeDto(EquipeDto equipe)
+        public async Task<ActionResult<EquipeBd>> PostEquipeDto(EquipeDto equipe)
         {
-            var equipeBd = new EquipBd
+            var equipeBd = new EquipeBd
             {
                 No_Equipe = equipe.No_Equipe,
                 Nom_Equipe = equipe.Nom_Equipe,
