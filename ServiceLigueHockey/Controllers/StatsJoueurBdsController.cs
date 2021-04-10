@@ -22,40 +22,42 @@ namespace ServiceLigueHockey.Controllers
             _context = context;
         }
 
-        // GET: api/StatsJoueurBds
-        [HttpGet]
-        public ActionResult<IQueryable<StatsJoueurBd>> GetStatsJoueurBd()
+        // GET: api/StatsJoueurBds/annee/5
+        [HttpGet("parannee/{annee}")]
+        public ActionResult<IEnumerable<StatsJoueurDto>> GetStatsJoueurBd(short annee)
         {
-            var retour = from item in _context.StatsJoueurBd.OrderBy(x => x.NbPoints).Take(50)
-                         select new StatsJoueurDto
-                         {
-                             No_JoueurRefId = item.No_JoueurRefId,
-                             AnneeStats = item.AnneeStats,
-                             NbPartiesJouees = item.NbPartiesJouees,
-                             NbButs = item.NbButs,
-                             NbPasses = item.NbPasses,
-                             NbPoints = item.NbPoints,
-                             PlusseMoins = item.PlusseMoins,
-                             NbMinutesPenalites = item.NbMinutesPenalites,
-                             MinutesJouees = item.MinutesJouees,
-                             Victoires = item.Victoires,
-                             Defaites = item.Defaites,
-                             Nulles = item.Nulles,
-                             DefaitesEnProlongation = item.DefaitesEnProlongation,
-                             ButsAlloues = item.ButsAlloues,
-                             TirsAlloues = item.TirsAlloues,
-                             Joueur = new JoueurDto
+            var listeStats = from item in _context.StatsJoueurBd
+                             where item.AnneeStats == annee
+                             orderby item.NbPoints descending
+                             select new StatsJoueurDto
                              {
-                                 No_Joueur = item.Joueur.No_Joueur,
-                                 Prenom = item.Joueur.Prenom,
-                                 Nom = item.Joueur.Nom,
-                                 Date_Naissance = item.Joueur.Date_Naissance,
-                                 ville_naissance = item.Joueur.Ville_naissance,
-                                 pays_origine = item.Joueur.Pays_origine
-                             }
-                         };
+                                 No_JoueurRefId = item.No_JoueurRefId,
+                                 AnneeStats = item.AnneeStats,
+                                 NbPartiesJouees = item.NbPartiesJouees,
+                                 NbButs = item.NbButs,
+                                 NbPasses = item.NbPasses,
+                                 NbPoints = item.NbPoints,
+                                 NbMinutesPenalites = item.NbMinutesPenalites,
+                                 PlusseMoins = item.PlusseMoins,
+                                 MinutesJouees = item.MinutesJouees,
+                                 Victoires = item.Victoires,
+                                 Defaites = item.Defaites,
+                                 DefaitesEnProlongation = item.DefaitesEnProlongation,
+                                 Nulles = item.Nulles,
+                                 ButsAlloues = item.ButsAlloues,
+                                 TirsAlloues = item.TirsAlloues,
+                                 Joueur = new JoueurDto
+                                 {
+                                     No_Joueur = item.Joueur.No_Joueur,
+                                     Prenom = item.Joueur.Prenom,
+                                     Nom = item.Joueur.Nom,
+                                     ville_naissance = item.Joueur.Ville_naissance,
+                                     pays_origine = item.Joueur.Pays_origine,
+                                     Date_Naissance = item.Joueur.Date_Naissance
+                                 }
+                             };
 
-            return Ok(_context.StatsJoueurBd.OrderBy(x => x.NbPoints).Take(50));
+            return Ok(listeStats.ToList());
         }
 
         // GET: api/StatsJoueurBds/5
@@ -69,74 +71,18 @@ namespace ServiceLigueHockey.Controllers
                 return NotFound();
             }
 
-            var retour = new StatsJoueurDto
-            {
-                No_JoueurRefId = statsJoueurBd.No_JoueurRefId,
-                AnneeStats = statsJoueurBd.AnneeStats,
-                NbPartiesJouees = statsJoueurBd.NbPartiesJouees,
-                NbButs = statsJoueurBd.NbButs,
-                NbPasses = statsJoueurBd.NbPasses,
-                NbPoints = statsJoueurBd.NbPoints,
-                NbMinutesPenalites = statsJoueurBd.NbMinutesPenalites,
-                MinutesJouees = statsJoueurBd.MinutesJouees,
-                PlusseMoins = statsJoueurBd.PlusseMoins,
-                Victoires = statsJoueurBd.Victoires,
-                Defaites = statsJoueurBd.Defaites,
-                DefaitesEnProlongation = statsJoueurBd.DefaitesEnProlongation,
-                Nulles = statsJoueurBd.Nulles,
-                ButsAlloues = statsJoueurBd.ButsAlloues,
-                TirsAlloues = statsJoueurBd.TirsAlloues,
-                Joueur = new JoueurDto
-                {
-                    No_Joueur = statsJoueurBd.Joueur.No_Joueur,
-                    Prenom = statsJoueurBd.Joueur.Prenom,
-                    Nom = statsJoueurBd.Joueur.Nom,
-                    Date_Naissance = statsJoueurBd.Joueur.Date_Naissance,
-                    ville_naissance = statsJoueurBd.Joueur.Ville_naissance,
-                    pays_origine = statsJoueurBd.Joueur.Pays_origine
-                }
-            };
-
-            return Ok(retour);
+            return statsJoueurBd;
         }
 
         // PUT: api/StatsJoueurBds/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStatsJoueurBd(int id, StatsJoueurDto statsJoueurDto)
+        public async Task<IActionResult> PutStatsJoueurBd(int id, StatsJoueurBd statsJoueurBd)
         {
-            if (id != statsJoueurDto.No_JoueurRefId)
+            if (id != statsJoueurBd.No_JoueurRefId)
             {
                 return BadRequest();
             }
-
-            var statsJoueurBd = new StatsJoueurBd
-            {
-                No_JoueurRefId=statsJoueurDto.No_JoueurRefId,
-                AnneeStats = statsJoueurDto.AnneeStats,
-                NbPartiesJouees = statsJoueurDto.NbPartiesJouees,
-                NbButs = statsJoueurDto.NbButs,
-                NbPasses = statsJoueurDto.NbPasses,
-                NbPoints = statsJoueurDto.NbPoints,
-                NbMinutesPenalites = statsJoueurDto.NbMinutesPenalites,
-                MinutesJouees = statsJoueurDto.MinutesJouees,
-                PlusseMoins = statsJoueurDto.PlusseMoins,
-                Victoires = statsJoueurDto.Victoires,
-                Defaites = statsJoueurDto.Defaites,
-                DefaitesEnProlongation = statsJoueurDto.DefaitesEnProlongation,
-                Nulles = statsJoueurDto.Nulles,
-                ButsAlloues = statsJoueurDto.ButsAlloues,
-                TirsAlloues = statsJoueurDto.TirsAlloues,
-                Joueur = new JoueurBd
-                {
-                    No_Joueur = statsJoueurDto.Joueur.No_Joueur,
-                    Prenom = statsJoueurDto.Joueur.Prenom,
-                    Nom = statsJoueurDto.Joueur.Nom,
-                    Date_Naissance = statsJoueurDto.Joueur.Date_Naissance,
-                    Ville_naissance = statsJoueurDto.Joueur.ville_naissance,
-                    Pays_origine = statsJoueurDto.Joueur.pays_origine
-                }
-            };
 
             _context.Entry(statsJoueurBd).State = EntityState.Modified;
 
@@ -162,36 +108,8 @@ namespace ServiceLigueHockey.Controllers
         // POST: api/StatsJoueurBds
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<StatsJoueurBd>> PostStatsJoueurBd(StatsJoueurDto statsJoueurDto)
+        public async Task<ActionResult<StatsJoueurBd>> PostStatsJoueurBd(StatsJoueurBd statsJoueurBd)
         {
-            var statsJoueurBd = new StatsJoueurBd
-            {
-                No_JoueurRefId = statsJoueurDto.No_JoueurRefId,
-                AnneeStats = statsJoueurDto.AnneeStats,
-                NbPartiesJouees = statsJoueurDto.NbPartiesJouees,
-                NbButs = statsJoueurDto.NbButs,
-                NbPasses = statsJoueurDto.NbPasses,
-                NbPoints = statsJoueurDto.NbPoints,
-                NbMinutesPenalites = statsJoueurDto.NbMinutesPenalites,
-                MinutesJouees = statsJoueurDto.MinutesJouees,
-                PlusseMoins = statsJoueurDto.PlusseMoins,
-                Victoires = statsJoueurDto.Victoires,
-                Defaites = statsJoueurDto.Defaites,
-                DefaitesEnProlongation = statsJoueurDto.DefaitesEnProlongation,
-                Nulles = statsJoueurDto.Nulles,
-                ButsAlloues = statsJoueurDto.ButsAlloues,
-                TirsAlloues = statsJoueurDto.TirsAlloues,
-                Joueur = new JoueurBd
-                {
-                    No_Joueur = statsJoueurDto.Joueur.No_Joueur,
-                    Prenom = statsJoueurDto.Joueur.Prenom,
-                    Nom = statsJoueurDto.Joueur.Nom,
-                    Date_Naissance = statsJoueurDto.Joueur.Date_Naissance,
-                    Ville_naissance = statsJoueurDto.Joueur.ville_naissance,
-                    Pays_origine = statsJoueurDto.Joueur.pays_origine
-                }
-            };
-
             _context.StatsJoueurBd.Add(statsJoueurBd);
             try
             {
