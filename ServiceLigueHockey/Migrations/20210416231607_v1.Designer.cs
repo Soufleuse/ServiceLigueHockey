@@ -11,17 +11,18 @@ using ServiceLigueHockey.Data;
 namespace ServiceLigueHockey.Migrations
 {
     [DbContext(typeof(ServiceLigueHockeyContext))]
-    [Migration("20210328172152_v4")]
-    partial class v4
+    [Migration("20210416231607_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("lemste")
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("Db2:ValueGenerationStrategy", Db2ValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ServiceLigueHockey.Models.EquipBd", b =>
+            modelBuilder.Entity("ServiceLigueHockey.Models.EquipeBd", b =>
                 {
                     b.Property<int>("No_Equipe")
                         .ValueGeneratedOnAdd()
@@ -244,6 +245,276 @@ namespace ServiceLigueHockey.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ServiceLigueHockey.Models.StatsJoueurBd", b =>
+                {
+                    b.Property<int>("No_JoueurRefId")
+                        .HasColumnType("int");
+
+                    b.Property<short>("AnneeStats")
+                        .HasColumnType("smallint");
+
+                    b.Property<int>("ButsAlloues")
+                        .HasColumnType("int");
+
+                    b.Property<short>("Defaites")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("DefaitesEnProlongation")
+                        .HasColumnType("smallint");
+
+                    b.Property<double>("MinutesJouees")
+                        .HasColumnType("float");
+
+                    b.Property<short>("NbButs")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("NbMinutesPenalites")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("NbPartiesJouees")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("NbPasses")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("NbPoints")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("Nulles")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("PlusseMoins")
+                        .HasColumnType("smallint");
+
+                    b.Property<int>("TirsAlloues")
+                        .HasColumnType("int");
+
+                    b.Property<short>("Victoires")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("No_JoueurRefId", "AnneeStats");
+
+                    b.ToTable("StatsJoueur");
+
+                    b.HasData(
+                        new
+                        {
+                            No_JoueurRefId = 1,
+                            AnneeStats = (short)2020,
+                            ButsAlloues = 0,
+                            Defaites = (short)0,
+                            DefaitesEnProlongation = (short)0,
+                            MinutesJouees = 500.0,
+                            NbButs = (short)10,
+                            NbMinutesPenalites = (short)15,
+                            NbPartiesJouees = (short)25,
+                            NbPasses = (short)20,
+                            NbPoints = (short)30,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)5,
+                            TirsAlloues = 0,
+                            Victoires = (short)0
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 2,
+                            AnneeStats = (short)2020,
+                            ButsAlloues = 0,
+                            Defaites = (short)0,
+                            DefaitesEnProlongation = (short)0,
+                            MinutesJouees = 500.0,
+                            NbButs = (short)15,
+                            NbMinutesPenalites = (short)51,
+                            NbPartiesJouees = (short)25,
+                            NbPasses = (short)10,
+                            NbPoints = (short)25,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)-2,
+                            TirsAlloues = 0,
+                            Victoires = (short)0
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 3,
+                            AnneeStats = (short)2020,
+                            ButsAlloues = 0,
+                            Defaites = (short)0,
+                            DefaitesEnProlongation = (short)0,
+                            MinutesJouees = 500.0,
+                            NbButs = (short)5,
+                            NbMinutesPenalites = (short)35,
+                            NbPartiesJouees = (short)25,
+                            NbPasses = (short)24,
+                            NbPoints = (short)29,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)25,
+                            TirsAlloues = 0,
+                            Victoires = (short)0
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 4,
+                            AnneeStats = (short)2020,
+                            ButsAlloues = 53,
+                            Defaites = (short)2,
+                            DefaitesEnProlongation = (short)6,
+                            MinutesJouees = 1500.0,
+                            NbButs = (short)0,
+                            NbMinutesPenalites = (short)4,
+                            NbPartiesJouees = (short)25,
+                            NbPasses = (short)0,
+                            NbPoints = (short)0,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)0,
+                            TirsAlloues = 564,
+                            Victoires = (short)9
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 1,
+                            AnneeStats = (short)2019,
+                            ButsAlloues = 0,
+                            Defaites = (short)0,
+                            DefaitesEnProlongation = (short)0,
+                            MinutesJouees = 500.0,
+                            NbButs = (short)1910,
+                            NbMinutesPenalites = (short)15,
+                            NbPartiesJouees = (short)82,
+                            NbPasses = (short)20,
+                            NbPoints = (short)1930,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)5,
+                            TirsAlloues = 0,
+                            Victoires = (short)0
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 2,
+                            AnneeStats = (short)2019,
+                            ButsAlloues = 0,
+                            Defaites = (short)0,
+                            DefaitesEnProlongation = (short)0,
+                            MinutesJouees = 500.0,
+                            NbButs = (short)1915,
+                            NbMinutesPenalites = (short)51,
+                            NbPartiesJouees = (short)82,
+                            NbPasses = (short)10,
+                            NbPoints = (short)1925,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)-2,
+                            TirsAlloues = 0,
+                            Victoires = (short)0
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 3,
+                            AnneeStats = (short)2019,
+                            ButsAlloues = 0,
+                            Defaites = (short)0,
+                            DefaitesEnProlongation = (short)0,
+                            MinutesJouees = 500.0,
+                            NbButs = (short)1905,
+                            NbMinutesPenalites = (short)35,
+                            NbPartiesJouees = (short)82,
+                            NbPasses = (short)24,
+                            NbPoints = (short)1929,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)25,
+                            TirsAlloues = 0,
+                            Victoires = (short)0
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 4,
+                            AnneeStats = (short)2019,
+                            ButsAlloues = 53,
+                            Defaites = (short)2,
+                            DefaitesEnProlongation = (short)6,
+                            MinutesJouees = 1500.0,
+                            NbButs = (short)1900,
+                            NbMinutesPenalites = (short)4,
+                            NbPartiesJouees = (short)82,
+                            NbPasses = (short)0,
+                            NbPoints = (short)1900,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)0,
+                            TirsAlloues = 564,
+                            Victoires = (short)9
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 1,
+                            AnneeStats = (short)2018,
+                            ButsAlloues = 0,
+                            Defaites = (short)0,
+                            DefaitesEnProlongation = (short)0,
+                            MinutesJouees = 500.0,
+                            NbButs = (short)1810,
+                            NbMinutesPenalites = (short)15,
+                            NbPartiesJouees = (short)65,
+                            NbPasses = (short)20,
+                            NbPoints = (short)1830,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)5,
+                            TirsAlloues = 0,
+                            Victoires = (short)0
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 2,
+                            AnneeStats = (short)2018,
+                            ButsAlloues = 0,
+                            Defaites = (short)0,
+                            DefaitesEnProlongation = (short)0,
+                            MinutesJouees = 500.0,
+                            NbButs = (short)1815,
+                            NbMinutesPenalites = (short)51,
+                            NbPartiesJouees = (short)65,
+                            NbPasses = (short)10,
+                            NbPoints = (short)1825,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)-2,
+                            TirsAlloues = 0,
+                            Victoires = (short)0
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 3,
+                            AnneeStats = (short)2018,
+                            ButsAlloues = 0,
+                            Defaites = (short)0,
+                            DefaitesEnProlongation = (short)0,
+                            MinutesJouees = 500.0,
+                            NbButs = (short)1805,
+                            NbMinutesPenalites = (short)35,
+                            NbPartiesJouees = (short)65,
+                            NbPasses = (short)24,
+                            NbPoints = (short)1829,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)25,
+                            TirsAlloues = 0,
+                            Victoires = (short)0
+                        },
+                        new
+                        {
+                            No_JoueurRefId = 4,
+                            AnneeStats = (short)2018,
+                            ButsAlloues = 53,
+                            Defaites = (short)2,
+                            DefaitesEnProlongation = (short)6,
+                            MinutesJouees = 1500.0,
+                            NbButs = (short)1800,
+                            NbMinutesPenalites = (short)4,
+                            NbPartiesJouees = (short)65,
+                            NbPasses = (short)0,
+                            NbPoints = (short)1800,
+                            Nulles = (short)0,
+                            PlusseMoins = (short)0,
+                            TirsAlloues = 564,
+                            Victoires = (short)9
+                        });
+                });
+
             modelBuilder.Entity("ServiceLigueHockey.Models.equipe_joueurBd", b =>
                 {
                     b.Property<int>("no_equipe")
@@ -258,10 +529,20 @@ namespace ServiceLigueHockey.Migrations
                     b.Property<DateTime?>("date_fin_avec_equipe")
                         .HasColumnType("timestamp(6)");
 
+                    b.Property<int?>("equipeBdNo_Equipe")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("joueurBdNo_Joueur")
+                        .HasColumnType("int");
+
                     b.Property<short>("no_dossard")
                         .HasColumnType("smallint");
 
                     b.HasKey("no_equipe", "no_joueur", "date_debut_avec_equipe");
+
+                    b.HasIndex("equipeBdNo_Equipe");
+
+                    b.HasIndex("joueurBdNo_Joueur");
 
                     b.ToTable("equipe_joueur");
 
@@ -357,6 +638,42 @@ namespace ServiceLigueHockey.Migrations
                             date_debut_avec_equipe = new DateTime(2012, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             no_dossard = (short)35
                         });
+                });
+
+            modelBuilder.Entity("ServiceLigueHockey.Models.StatsJoueurBd", b =>
+                {
+                    b.HasOne("ServiceLigueHockey.Models.JoueurBd", "Joueur")
+                        .WithMany()
+                        .HasForeignKey("No_JoueurRefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Joueur");
+                });
+
+            modelBuilder.Entity("ServiceLigueHockey.Models.equipe_joueurBd", b =>
+                {
+                    b.HasOne("ServiceLigueHockey.Models.EquipeBd", "equipeBd")
+                        .WithMany("listeEquipeJoueur")
+                        .HasForeignKey("equipeBdNo_Equipe");
+
+                    b.HasOne("ServiceLigueHockey.Models.JoueurBd", "joueurBd")
+                        .WithMany("listeEquipeJoueur")
+                        .HasForeignKey("joueurBdNo_Joueur");
+
+                    b.Navigation("equipeBd");
+
+                    b.Navigation("joueurBd");
+                });
+
+            modelBuilder.Entity("ServiceLigueHockey.Models.EquipeBd", b =>
+                {
+                    b.Navigation("listeEquipeJoueur");
+                });
+
+            modelBuilder.Entity("ServiceLigueHockey.Models.JoueurBd", b =>
+                {
+                    b.Navigation("listeEquipeJoueur");
                 });
 #pragma warning restore 612, 618
         }

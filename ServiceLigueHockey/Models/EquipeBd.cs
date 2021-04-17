@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ServiceLigueHockey.Models
 {
-    public class EquipBd
+    public class EquipeBd
     {
         [Key]
         public int No_Equipe { get; set; }
@@ -19,5 +20,7 @@ namespace ServiceLigueHockey.Models
         public Int32? Annee_fin { get; set; }
 
         public int? Est_Devenue_Equipe { get; set; }
+
+        public ICollection<equipe_joueurBd> listeEquipeJoueur { get; set; }
     }
 }
