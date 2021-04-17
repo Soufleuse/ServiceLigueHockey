@@ -3,12 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ServiceLigueHockey.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "lemste");
+
             migrationBuilder.CreateTable(
                 name: "Equipe",
+                schema: "lemste",
                 columns: table => new
                 {
                     No_Equipe = table.Column<int>(type: "int", nullable: false)
@@ -26,6 +30,7 @@ namespace ServiceLigueHockey.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Joueur",
+                schema: "lemste",
                 columns: table => new
                 {
                     No_Joueur = table.Column<int>(type: "int", nullable: false)
@@ -43,6 +48,7 @@ namespace ServiceLigueHockey.Migrations
 
             migrationBuilder.CreateTable(
                 name: "equipe_joueur",
+                schema: "lemste",
                 columns: table => new
                 {
                     no_equipe = table.Column<int>(type: "int", nullable: false),
@@ -59,12 +65,14 @@ namespace ServiceLigueHockey.Migrations
                     table.ForeignKey(
                         name: "FK_equipe_joueur_Equipe_equipeBdNo_Equipe",
                         column: x => x.equipeBdNo_Equipe,
+                        principalSchema: "lemste",
                         principalTable: "Equipe",
                         principalColumn: "No_Equipe",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_equipe_joueur_Joueur_joueurBdNo_Joueur",
                         column: x => x.joueurBdNo_Joueur,
+                        principalSchema: "lemste",
                         principalTable: "Joueur",
                         principalColumn: "No_Joueur",
                         onDelete: ReferentialAction.Restrict);
@@ -72,6 +80,7 @@ namespace ServiceLigueHockey.Migrations
 
             migrationBuilder.CreateTable(
                 name: "StatsJoueur",
+                schema: "lemste",
                 columns: table => new
                 {
                     AnneeStats = table.Column<short>(type: "smallint", nullable: false),
@@ -96,12 +105,14 @@ namespace ServiceLigueHockey.Migrations
                     table.ForeignKey(
                         name: "FK_StatsJoueur_Joueur_No_JoueurRefId",
                         column: x => x.No_JoueurRefId,
+                        principalSchema: "lemste",
                         principalTable: "Joueur",
                         principalColumn: "No_Joueur",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
+                schema: "lemste",
                 table: "Equipe",
                 columns: new[] { "No_Equipe", "Annee_debut", "Annee_fin", "Est_Devenue_Equipe", "Nom_Equipe", "Ville" },
                 values: new object[,]
@@ -115,6 +126,7 @@ namespace ServiceLigueHockey.Migrations
                 });
 
             migrationBuilder.InsertData(
+                schema: "lemste",
                 table: "Joueur",
                 columns: new[] { "No_Joueur", "Date_Naissance", "Nom", "Pays_origine", "Prenom", "Ville_naissance" },
                 values: new object[,]
@@ -135,6 +147,7 @@ namespace ServiceLigueHockey.Migrations
                 });
 
             migrationBuilder.InsertData(
+                schema: "lemste",
                 table: "equipe_joueur",
                 columns: new[] { "date_debut_avec_equipe", "no_equipe", "no_joueur", "date_fin_avec_equipe", "equipeBdNo_Equipe", "joueurBdNo_Joueur", "no_dossard" },
                 values: new object[,]
@@ -155,23 +168,34 @@ namespace ServiceLigueHockey.Migrations
                 });
 
             migrationBuilder.InsertData(
+                schema: "lemste",
                 table: "StatsJoueur",
                 columns: new[] { "AnneeStats", "No_JoueurRefId", "ButsAlloues", "Defaites", "DefaitesEnProlongation", "MinutesJouees", "NbButs", "NbMinutesPenalites", "NbPartiesJouees", "NbPasses", "NbPoints", "Nulles", "PlusseMoins", "TirsAlloues", "Victoires" },
                 values: new object[,]
                 {
                     { (short)2020, 1, 0, (short)0, (short)0, 500.0, (short)10, (short)15, (short)25, (short)20, (short)30, (short)0, (short)5, 0, (short)0 },
+                    { (short)2019, 1, 0, (short)0, (short)0, 500.0, (short)1910, (short)15, (short)82, (short)20, (short)1930, (short)0, (short)5, 0, (short)0 },
+                    { (short)2018, 1, 0, (short)0, (short)0, 500.0, (short)1810, (short)15, (short)65, (short)20, (short)1830, (short)0, (short)5, 0, (short)0 },
                     { (short)2020, 2, 0, (short)0, (short)0, 500.0, (short)15, (short)51, (short)25, (short)10, (short)25, (short)0, (short)-2, 0, (short)0 },
+                    { (short)2019, 2, 0, (short)0, (short)0, 500.0, (short)1915, (short)51, (short)82, (short)10, (short)1925, (short)0, (short)-2, 0, (short)0 },
+                    { (short)2018, 2, 0, (short)0, (short)0, 500.0, (short)1815, (short)51, (short)65, (short)10, (short)1825, (short)0, (short)-2, 0, (short)0 },
                     { (short)2020, 3, 0, (short)0, (short)0, 500.0, (short)5, (short)35, (short)25, (short)24, (short)29, (short)0, (short)25, 0, (short)0 },
-                    { (short)2020, 4, 53, (short)2, (short)6, 1500.0, (short)0, (short)4, (short)25, (short)0, (short)0, (short)0, (short)0, 564, (short)9 }
+                    { (short)2019, 3, 0, (short)0, (short)0, 500.0, (short)1905, (short)35, (short)82, (short)24, (short)1929, (short)0, (short)25, 0, (short)0 },
+                    { (short)2018, 3, 0, (short)0, (short)0, 500.0, (short)1805, (short)35, (short)65, (short)24, (short)1829, (short)0, (short)25, 0, (short)0 },
+                    { (short)2020, 4, 53, (short)2, (short)6, 1500.0, (short)0, (short)4, (short)25, (short)0, (short)0, (short)0, (short)0, 564, (short)9 },
+                    { (short)2019, 4, 53, (short)2, (short)6, 1500.0, (short)1900, (short)4, (short)82, (short)0, (short)1900, (short)0, (short)0, 564, (short)9 },
+                    { (short)2018, 4, 53, (short)2, (short)6, 1500.0, (short)1800, (short)4, (short)65, (short)0, (short)1800, (short)0, (short)0, 564, (short)9 }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_equipe_joueur_equipeBdNo_Equipe",
+                schema: "lemste",
                 table: "equipe_joueur",
                 column: "equipeBdNo_Equipe");
 
             migrationBuilder.CreateIndex(
                 name: "IX_equipe_joueur_joueurBdNo_Joueur",
+                schema: "lemste",
                 table: "equipe_joueur",
                 column: "joueurBdNo_Joueur");
         }
@@ -179,16 +203,20 @@ namespace ServiceLigueHockey.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "equipe_joueur");
+                name: "equipe_joueur",
+                schema: "lemste");
 
             migrationBuilder.DropTable(
-                name: "StatsJoueur");
+                name: "StatsJoueur",
+                schema: "lemste");
 
             migrationBuilder.DropTable(
-                name: "Equipe");
+                name: "Equipe",
+                schema: "lemste");
 
             migrationBuilder.DropTable(
-                name: "Joueur");
+                name: "Joueur",
+                schema: "lemste");
         }
     }
 }

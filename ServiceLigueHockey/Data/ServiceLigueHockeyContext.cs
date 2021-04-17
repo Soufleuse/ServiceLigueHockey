@@ -27,7 +27,7 @@ namespace ServiceLigueHockey.Data
             if (!optionsBuilder.IsConfigured)
             {   
                 //optionsBuilder.UseSqlServer("Server=VMWIN10PRO\\SQLEXPRESS;Database=LigueHockey;Trusted_Connection=True;MultipleActiveResultSets=true");
-                optionsBuilder.UseDb2("DATABASE=LigueO;SERVER=winServer2019:50000;UID=lemste;PWD=misty@01;CurrentSchema=DB2ADMIN;",
+                optionsBuilder.UseDb2("DATABASE=LigueO;SERVER=winServer2019:50000;UID=lemste;PWD=misty@01;CurrentSchema=lemste;",
                     p => p.SetServerInfo(IBMDBServerType.LUW, IBMDBServerVersion.LUW_11_01_2020));
             }
         }
@@ -35,6 +35,8 @@ namespace ServiceLigueHockey.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.HasDefaultSchema("lemste");
 
             modelBuilder.Entity<EquipeBd>()
                 .HasData(
