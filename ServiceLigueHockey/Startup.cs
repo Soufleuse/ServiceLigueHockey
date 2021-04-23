@@ -30,7 +30,6 @@ namespace ServiceLigueHockey
             });
 
             services.AddControllers();
-            services.AddHostedService<ApplicationPartsLogger>();
 
             //var connection = Configuration.GetConnectionString("ServiceLigueHockeyContext");
             //services.AddDbContext<ServiceLigueHockeyContext>(options =>
