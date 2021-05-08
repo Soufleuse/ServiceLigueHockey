@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using IBM.EntityFrameworkCore;
+//using IBM.EntityFrameworkCore;
 using ServiceLigueHockey.Models;
 using System;
 
@@ -24,11 +24,13 @@ namespace ServiceLigueHockey.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // Ché pas pourquoi, il a fallu mettre ça ici pour que je me pluggue sur mon instance SQLEXPRESS dans IIS normal.
+            optionsBuilder.UseSqlServer("Server=VMWIN10PRO\\SQLEXPRESS;Database=LigueHockey;Trusted_Connection=True;MultipleActiveResultSets=true");
             if (!optionsBuilder.IsConfigured)
-            {   
+            {
                 //optionsBuilder.UseSqlServer("Server=VMWIN10PRO\\SQLEXPRESS;Database=LigueHockey;Trusted_Connection=True;MultipleActiveResultSets=true");
-                optionsBuilder.UseDb2("DATABASE=LigueO;SERVER=winServer2019:50000;UID=lemste;PWD=misty@01;CurrentSchema=lemste;",
-                    p => p.SetServerInfo(IBMDBServerType.LUW, IBMDBServerVersion.LUW_11_01_2020));
+                /*optionsBuilder.UseDb2("DATABASE=LigueO;SERVER=winServer2019:50000;UID=lemste;PWD=<mon mot de passe>;CurrentSchema=lemste;",
+                    p => p.SetServerInfo(IBMDBServerType.LUW, IBMDBServerVersion.LUW_11_01_2020));*/
             }
         }
 
@@ -36,7 +38,8 @@ namespace ServiceLigueHockey.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.HasDefaultSchema("lemste");
+            // TODO à mettre pour Db2
+            //modelBuilder.HasDefaultSchema("lemste");
 
             modelBuilder.Entity<EquipeBd>()
                 .HasData(

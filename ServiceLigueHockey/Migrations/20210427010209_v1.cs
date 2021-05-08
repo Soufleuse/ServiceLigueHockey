@@ -7,18 +7,14 @@ namespace ServiceLigueHockey.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "lemste");
-
             migrationBuilder.CreateTable(
                 name: "Equipe",
-                schema: "lemste",
                 columns: table => new
                 {
                     No_Equipe = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("Db2:Identity", "1, 1"),
-                    Nom_Equipe = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    Ville = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nom_Equipe = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Ville = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Annee_debut = table.Column<int>(type: "int", nullable: false),
                     Annee_fin = table.Column<int>(type: "int", nullable: true),
                     Est_Devenue_Equipe = table.Column<int>(type: "int", nullable: true)
@@ -30,16 +26,15 @@ namespace ServiceLigueHockey.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Joueur",
-                schema: "lemste",
                 columns: table => new
                 {
                     No_Joueur = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("Db2:Identity", "1, 1"),
-                    Prenom = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    Nom = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    Date_Naissance = table.Column<DateTime>(type: "timestamp(6)", nullable: false),
-                    Ville_naissance = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    Pays_origine = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Prenom = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Nom = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Date_Naissance = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Ville_naissance = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Pays_origine = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,15 +43,14 @@ namespace ServiceLigueHockey.Migrations
 
             migrationBuilder.CreateTable(
                 name: "equipe_joueur",
-                schema: "lemste",
                 columns: table => new
                 {
                     no_equipe = table.Column<int>(type: "int", nullable: false),
                     no_joueur = table.Column<int>(type: "int", nullable: false),
-                    date_debut_avec_equipe = table.Column<DateTime>(type: "timestamp(6)", nullable: false),
+                    date_debut_avec_equipe = table.Column<DateTime>(type: "datetime2", nullable: false),
                     equipeBdNo_Equipe = table.Column<int>(type: "int", nullable: true),
                     joueurBdNo_Joueur = table.Column<int>(type: "int", nullable: true),
-                    date_fin_avec_equipe = table.Column<DateTime>(type: "timestamp(6)", nullable: true),
+                    date_fin_avec_equipe = table.Column<DateTime>(type: "datetime2", nullable: true),
                     no_dossard = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
@@ -65,14 +59,12 @@ namespace ServiceLigueHockey.Migrations
                     table.ForeignKey(
                         name: "FK_equipe_joueur_Equipe_equipeBdNo_Equipe",
                         column: x => x.equipeBdNo_Equipe,
-                        principalSchema: "lemste",
                         principalTable: "Equipe",
                         principalColumn: "No_Equipe",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_equipe_joueur_Joueur_joueurBdNo_Joueur",
                         column: x => x.joueurBdNo_Joueur,
-                        principalSchema: "lemste",
                         principalTable: "Joueur",
                         principalColumn: "No_Joueur",
                         onDelete: ReferentialAction.Restrict);
@@ -80,7 +72,6 @@ namespace ServiceLigueHockey.Migrations
 
             migrationBuilder.CreateTable(
                 name: "StatsJoueur",
-                schema: "lemste",
                 columns: table => new
                 {
                     AnneeStats = table.Column<short>(type: "smallint", nullable: false),
@@ -105,14 +96,12 @@ namespace ServiceLigueHockey.Migrations
                     table.ForeignKey(
                         name: "FK_StatsJoueur_Joueur_No_JoueurRefId",
                         column: x => x.No_JoueurRefId,
-                        principalSchema: "lemste",
                         principalTable: "Joueur",
                         principalColumn: "No_Joueur",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                schema: "lemste",
                 table: "Equipe",
                 columns: new[] { "No_Equipe", "Annee_debut", "Annee_fin", "Est_Devenue_Equipe", "Nom_Equipe", "Ville" },
                 values: new object[,]
@@ -126,7 +115,6 @@ namespace ServiceLigueHockey.Migrations
                 });
 
             migrationBuilder.InsertData(
-                schema: "lemste",
                 table: "Joueur",
                 columns: new[] { "No_Joueur", "Date_Naissance", "Nom", "Pays_origine", "Prenom", "Ville_naissance" },
                 values: new object[,]
@@ -147,7 +135,6 @@ namespace ServiceLigueHockey.Migrations
                 });
 
             migrationBuilder.InsertData(
-                schema: "lemste",
                 table: "equipe_joueur",
                 columns: new[] { "date_debut_avec_equipe", "no_equipe", "no_joueur", "date_fin_avec_equipe", "equipeBdNo_Equipe", "joueurBdNo_Joueur", "no_dossard" },
                 values: new object[,]
@@ -168,7 +155,6 @@ namespace ServiceLigueHockey.Migrations
                 });
 
             migrationBuilder.InsertData(
-                schema: "lemste",
                 table: "StatsJoueur",
                 columns: new[] { "AnneeStats", "No_JoueurRefId", "ButsAlloues", "Defaites", "DefaitesEnProlongation", "MinutesJouees", "NbButs", "NbMinutesPenalites", "NbPartiesJouees", "NbPasses", "NbPoints", "Nulles", "PlusseMoins", "TirsAlloues", "Victoires" },
                 values: new object[,]
@@ -189,13 +175,11 @@ namespace ServiceLigueHockey.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_equipe_joueur_equipeBdNo_Equipe",
-                schema: "lemste",
                 table: "equipe_joueur",
                 column: "equipeBdNo_Equipe");
 
             migrationBuilder.CreateIndex(
                 name: "IX_equipe_joueur_joueurBdNo_Joueur",
-                schema: "lemste",
                 table: "equipe_joueur",
                 column: "joueurBdNo_Joueur");
         }
@@ -203,20 +187,16 @@ namespace ServiceLigueHockey.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "equipe_joueur",
-                schema: "lemste");
+                name: "equipe_joueur");
 
             migrationBuilder.DropTable(
-                name: "StatsJoueur",
-                schema: "lemste");
+                name: "StatsJoueur");
 
             migrationBuilder.DropTable(
-                name: "Equipe",
-                schema: "lemste");
+                name: "Equipe");
 
             migrationBuilder.DropTable(
-                name: "Joueur",
-                schema: "lemste");
+                name: "Joueur");
         }
     }
 }

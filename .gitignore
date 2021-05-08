@@ -8,7 +8,8 @@ ServiceLigueHockey\bin\*
 .vs/ServiceLigueHockey/config/debuggerConfiguration-f89980e4-d45a-4449-ab52-547a5057f1af.json
 .vs/ServiceLigueHockey/config/applicationhost.config
 ServiceLigueHockey/bin/Debug/net5.0/*
+ServiceLigueHockey/bin/Release/net5.0/*
 ServiceLigueHockey/obj/*
-ServiceLigueHockey/obj/Debug/net5.0/ServiceLigueHockey.csprojAssemblyReference.cache
+ServiceLigueHockey/obj/Debug/net5.0/*
 TestServices/bin/*
 TestServices/obj/*

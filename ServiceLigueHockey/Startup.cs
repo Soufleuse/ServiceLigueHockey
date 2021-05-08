@@ -1,6 +1,7 @@
 using IBM.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,12 +32,12 @@ namespace ServiceLigueHockey
 
             services.AddControllers();
 
-            //var connection = Configuration.GetConnectionString("ServiceLigueHockeyContext");
-            //services.AddDbContext<ServiceLigueHockeyContext>(options =>
-            //        options.UseSqlServer(connection));
-            var connection = Configuration.GetConnectionString("ServiceLigueHockeyContextDb2");
+            var connection = Configuration.GetConnectionString("ServiceLigueHockeyContext");
             services.AddDbContext<ServiceLigueHockeyContext>(options =>
-                    options.UseDb2(connection, p => p.SetServerInfo(IBMDBServerType.LUW, IBMDBServerVersion.LUW_11_01_2020)));
+                    options.UseSqlServer(connection));
+            /*var connection = Configuration.GetConnectionString("ServiceLigueHockeyContextDb2");
+            services.AddDbContext<ServiceLigueHockeyContext>(options =>
+                    options.UseDb2(connection, p => p.SetServerInfo(IBMDBServerType.LUW, IBMDBServerVersion.LUW_11_01_2020)));*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
