@@ -104,7 +104,7 @@ namespace ServiceLigueHockey.Controllers
         // POST: api/EquipeBds
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<EquipeBd>> PostEquipeDto(EquipeDto equipe)
+        public async Task<ActionResult<EquipeDto>> PostEquipeDto(EquipeDto equipe)
         {
             var equipeBd = new EquipeBd
             {
@@ -119,7 +119,10 @@ namespace ServiceLigueHockey.Controllers
             _context.Equipe.Add(equipeBd);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEquipeDto", new { id = equipeBd.No_Equipe }, equipe);
+            equipe.No_Equipe = equipeBd.No_Equipe;
+
+            //return CreatedAtAction(nameof(EquipeDto), new { id = equipeBd.No_Equipe }, equipe);
+            return CreatedAtAction("PostEquipeDto", equipe);
         }
 
         // DELETE: api/EquipeBds/5
