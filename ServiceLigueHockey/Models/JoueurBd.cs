@@ -24,5 +24,7 @@ namespace ServiceLigueHockey.Models
         public string Pays_origine { get; set; }
 
         public ICollection<equipe_joueurBd> listeEquipeJoueur { get; set; }
+
+        public ICollection<StatsJoueurBd> listeStatsJoueur { get; set; }
     }
 }

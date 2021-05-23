@@ -24,7 +24,7 @@ namespace ServiceLigueHockey.Controllers
 
         // GET: api/equipe_joueurBds
         [HttpGet]
-        public IList<equipe_joueurDto> Getequipe_joueurBd()
+        public ActionResult<IList<equipe_joueurDto>> Getequipe_joueurBd()
         {
             var listeEquipeJoueur = from item in _context.equipe_joueur
                                     select new equipe_joueurDto
@@ -52,7 +52,7 @@ namespace ServiceLigueHockey.Controllers
                 });
             }
 
-            return retour;
+            return Ok(retour);
         }
 
         // GET: api/equipe_joueurBds/5
@@ -164,7 +164,7 @@ namespace ServiceLigueHockey.Controllers
                 }
             }
 
-            return CreatedAtAction("Getequipe_joueurBd", new { id = equipe_joueurBd.no_equipe }, equipe_joueurDto);
+            return CreatedAtAction(nameof(equipe_joueurDto), new { id = equipe_joueurBd.no_equipe }, equipe_joueurDto);
         }
 
         // DELETE: api/equipe_joueurBds/5

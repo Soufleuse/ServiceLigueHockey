@@ -164,6 +164,17 @@ namespace ServiceLigueHockey.Controllers
         [HttpPost]
         public async Task<ActionResult<StatsJoueurDto>> PostStatsJoueurBd(StatsJoueurDto statsJoueurDto)
         {
+            var joueurBd = new JoueurBd
+            {
+                No_Joueur = statsJoueurDto.Joueur.No_Joueur,
+                Prenom = statsJoueurDto.Joueur.Prenom,
+                Nom = statsJoueurDto.Joueur.Nom,
+                Ville_naissance = statsJoueurDto.Joueur.ville_naissance,
+                Pays_origine = statsJoueurDto.Joueur.pays_origine,
+                Date_Naissance = statsJoueurDto.Joueur.Date_Naissance,
+                listeStatsJoueur = new List<StatsJoueurBd>()
+            };
+
             var statsJoueurBd = new StatsJoueurBd
             {
                 No_JoueurRefId = statsJoueurDto.No_JoueurRefId,
@@ -192,12 +203,15 @@ namespace ServiceLigueHockey.Controllers
                 }
             };
 
+            _context.Joueur.Attach(statsJoueurBd.Joueur);
             _context.StatsJoueurBd.Add(statsJoueurBd);
+            joueurBd.listeStatsJoueur.Add(statsJoueurBd);
+
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
                 if (StatsJoueurBdExists(statsJoueurBd.No_JoueurRefId, statsJoueurBd.AnneeStats))
                 {
@@ -209,7 +223,7 @@ namespace ServiceLigueHockey.Controllers
                 }
             }
 
-            return CreatedAtAction("GetStatsJoueurBd", new { id = statsJoueurBd.No_JoueurRefId }, statsJoueurBd);
+            return CreatedAtAction("PostStatsJoueurBd", statsJoueurDto);
         }
 
         // DELETE: api/StatsJoueurBds/5

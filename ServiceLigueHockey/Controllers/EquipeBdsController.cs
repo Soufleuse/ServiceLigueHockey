@@ -21,7 +21,7 @@ namespace ServiceLigueHockey.Controllers
 
         // GET: api/EquipeBds
         [HttpGet]
-        public IQueryable<EquipeDto> GetEquipeDto()
+        public ActionResult<IQueryable<EquipeDto>> GetEquipeDto()
         {
             var listeEquipe = from equipe in _context.Equipe
                               select new EquipeDto
@@ -33,7 +33,7 @@ namespace ServiceLigueHockey.Controllers
                                   Annee_fin = equipe.Annee_fin,
                                   Est_Devenue_Equipe = equipe.Est_Devenue_Equipe
                               };
-            return listeEquipe;
+            return Ok(listeEquipe);
         }
 
         // GET: api/EquipeBds/5
@@ -121,7 +121,6 @@ namespace ServiceLigueHockey.Controllers
 
             equipe.No_Equipe = equipeBd.No_Equipe;
 
-            //return CreatedAtAction(nameof(EquipeDto), new { id = equipeBd.No_Equipe }, equipe);
             return CreatedAtAction("PostEquipeDto", equipe);
         }
 

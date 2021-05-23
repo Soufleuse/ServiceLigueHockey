@@ -21,7 +21,7 @@ namespace ServiceLigueHockey.Controllers
 
         // GET: api/JoueurBds
         [HttpGet]
-        public IQueryable<JoueurDto> GetJoueurBd()
+        public ActionResult<IQueryable<JoueurDto>> GetJoueurBd()
         {
             var listeJoueur = from joueur in _context.Joueur
                               select new JoueurDto
@@ -33,7 +33,7 @@ namespace ServiceLigueHockey.Controllers
                                   pays_origine = joueur.Pays_origine,
                                   Date_Naissance = joueur.Date_Naissance
                               };
-            return listeJoueur;
+            return Ok(listeJoueur);
         }
 
         // GET: api/JoueurBds/5
@@ -94,12 +94,24 @@ namespace ServiceLigueHockey.Controllers
         // POST: api/JoueurBds
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<JoueurBd>> PostJoueurBd(JoueurBd joueurBd)
+        public async Task<ActionResult<JoueurDto>> PostJoueurDto(JoueurDto joueur)
         {
+            var joueurBd = new JoueurBd
+            {
+                No_Joueur = joueur.No_Joueur,
+                Prenom = joueur.Prenom,
+                Nom = joueur.Nom,
+                Date_Naissance = joueur.Date_Naissance,
+                Ville_naissance = joueur.ville_naissance,
+                Pays_origine = joueur.pays_origine
+            };
+
             _context.Joueur.Add(joueurBd);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetJoueurBd", new { id = joueurBd.No_Joueur }, joueurBd);
+            joueur.No_Joueur = joueurBd.No_Joueur;
+
+            return CreatedAtAction("PostJoueurDto", joueur);
         }
 
         // DELETE: api/JoueurBds/5
