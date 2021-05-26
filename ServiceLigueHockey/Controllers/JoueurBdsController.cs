@@ -8,6 +8,9 @@ using ServiceLigueHockey.Models.Dto;
 
 namespace ServiceLigueHockey.Controllers
 {
+    /*
+     * Contrôlleur pour JoueurBd
+     */
     [Route("api/[controller]")]
     [ApiController]
     public class JoueurBdsController : ControllerBase
