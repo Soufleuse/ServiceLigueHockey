@@ -6,6 +6,9 @@ using ServiceLigueHockey.Data;
 using ServiceLigueHockey.Models;
 using ServiceLigueHockey.Models.Dto;
 
+// Si jamais tu veux savoir c'est quoi la version de ton compilateur/ta version de C#, décomenter la prochaine ligne.
+//#error version
+
 namespace ServiceLigueHockey.Controllers
 {
     /*
