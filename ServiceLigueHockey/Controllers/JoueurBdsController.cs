@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +14,7 @@ using ServiceLigueHockey.Models.Dto;
 namespace ServiceLigueHockey.Controllers
 {
     /*
-     * Contrôlleur pour JoueurBd
+     * Controlleur pour JoueurBd
      */
     [Route("api/[controller]")]
     [ApiController]
@@ -111,6 +113,17 @@ namespace ServiceLigueHockey.Controllers
                 Ville_naissance = joueur.ville_naissance,
                 Pays_origine = joueur.pays_origine
             };
+
+            // Si je veux ajouter des stats de joueur à zéro, je n'ai qu'à décommenter le bloc de code suivant.
+            /*var statJoueurBd = new StatsJoueurBd
+            {
+                No_JoueurRefId = joueurBd.No_Joueur,
+                AnneeStats = (short)DateTime.Now.Year,
+                ButsAlloues = 0
+            };
+
+            joueurBd.listeStatsJoueur = new Collection<StatsJoueurBd>();
+            joueurBd.listeStatsJoueur.Add(statJoueurBd);*/
 
             _context.Joueur.Add(joueurBd);
             await _context.SaveChangesAsync();
