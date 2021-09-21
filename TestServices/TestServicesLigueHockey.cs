@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,11 +33,13 @@ namespace TestServices
             {
                 var equipeController = new EquipeBdsController(contextePropre);
 
-                // Exécuter
+                // Exï¿½cuter
                 var maListe = equipeController.GetEquipeDto();
+                var convertirMaListe = (OkObjectResult)maListe.Result;
+                var entite = (IQueryable<EquipeDto>)convertirMaListe.Value;
 
                 // Valider
-                Assert.IsTrue(maListe.Count() == 3);
+                Assert.IsTrue(entite.Count() == 3);
             }
         }
     }
