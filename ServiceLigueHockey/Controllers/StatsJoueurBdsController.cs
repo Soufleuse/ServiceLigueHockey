@@ -215,7 +215,7 @@ namespace ServiceLigueHockey.Controllers
             {
                 if (StatsJoueurBdExists(statsJoueurBd.No_JoueurRefId, statsJoueurBd.AnneeStats))
                 {
-                    return Conflict();
+                    return Conflict(ex);
                 }
                 else
                 {
