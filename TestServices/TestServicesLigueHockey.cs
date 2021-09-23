@@ -1,10 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using ServiceLigueHockey.Controllers;
 using ServiceLigueHockey.Data;
 using ServiceLigueHockey.Models;

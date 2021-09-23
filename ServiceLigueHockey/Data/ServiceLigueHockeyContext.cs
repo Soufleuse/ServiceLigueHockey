@@ -28,7 +28,7 @@ namespace ServiceLigueHockey.Data
             //optionsBuilder.UseSqlServer("Server=VMWIN10PRO\\SQLEXPRESS;Database=LigueHockey;Trusted_Connection=True;MultipleActiveResultSets=true");
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server=VMWIN10PRO\\SQLEXPRESS;Database=LigueHockey;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=VMWIN10PRO\\SQLEXPRESS;Database=LigueHockey;Trusted_Connection=True;MultipleActiveResultSets=true");
                 /*optionsBuilder.UseDb2("DATABASE=LigueO;SERVER=winServer2019:50000;UID=lemste;PWD=<mon mot de passe>;CurrentSchema=lemste;",
                     p => p.SetServerInfo(IBMDBServerType.LUW, IBMDBServerVersion.LUW_11_01_2020));*/
             }
