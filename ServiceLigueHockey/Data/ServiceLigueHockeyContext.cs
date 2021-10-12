@@ -29,6 +29,7 @@ namespace ServiceLigueHockey.Data
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=VMWIN10PRO\\SQLEXPRESS;Database=LigueHockey;Trusted_Connection=True;MultipleActiveResultSets=true");
+                //optionsBuilder.UseSqlServer("Server=steve-lubuntu\\SQLEXPRESS;Database=LigueHockey;Trusted_Connection=True;MultipleActiveResultSets=true");
                 /*optionsBuilder.UseDb2("DATABASE=LigueO;SERVER=winServer2019:50000;UID=lemste;PWD=<mon mot de passe>;CurrentSchema=lemste;",
                     p => p.SetServerInfo(IBMDBServerType.LUW, IBMDBServerVersion.LUW_11_01_2020));*/
             }
@@ -46,7 +47,7 @@ namespace ServiceLigueHockey.Data
             modelBuilder.Entity<EquipeBd>().Property<string>("Nom_Equipe").HasMaxLength(50);
             modelBuilder.Entity<EquipeBd>().Property<string>("Ville").HasMaxLength(50);
 
-            /*modelBuilder.Entity<EquipeBd>()
+            modelBuilder.Entity<EquipeBd>()
                 .HasData(
                 new EquipeBd { No_Equipe = 1, Nom_Equipe = "Canadiensssss", Ville = "Mourial", Annee_debut = 1989 },
                 new EquipeBd { No_Equipe = 2, Nom_Equipe = "Bruns", Ville = "Albany", Annee_debut = 1984 },
@@ -71,11 +72,11 @@ namespace ServiceLigueHockey.Data
                 new JoueurBd { No_Joueur = 11, Prenom = "Andrew", Nom = "Cruz", Date_Naissance = new DateTime(1997, 7, 30), Ville_naissance = "Dallas", Pays_origine = "États-Unis" },
                 new JoueurBd { No_Joueur = 12, Prenom = "Chris", Nom = "Trout", Date_Naissance = new DateTime(1991, 8, 20), Ville_naissance = "Eau Claire", Pays_origine = "États-Unis" },
                 new JoueurBd { No_Joueur = 13, Prenom = "Sergei", Nom = "Datzyuk", Date_Naissance = new DateTime(1992, 9, 6), Ville_naissance = "Eau Claire", Pays_origine = "États-Unis" }
-                );*/
+                );
 
             modelBuilder.Entity<equipe_joueurBd>()
                 .HasKey(c => new { c.no_equipe, c.no_joueur, c.date_debut_avec_equipe });
-            /*modelBuilder.Entity<equipe_joueurBd>()
+            modelBuilder.Entity<equipe_joueurBd>()
                 .HasData(
                 new equipe_joueurBd { no_equipe = 1, no_joueur = 1, no_dossard = 23, date_debut_avec_equipe = new DateTime(2008, 9, 30), date_fin_avec_equipe = null },
                 new equipe_joueurBd { no_equipe = 1, no_joueur = 2, no_dossard = 24, date_debut_avec_equipe = new DateTime(2016, 9, 30), date_fin_avec_equipe = null },
@@ -90,12 +91,12 @@ namespace ServiceLigueHockey.Data
                 new equipe_joueurBd { no_equipe = 3, no_joueur = 11, no_dossard = 33, date_debut_avec_equipe = new DateTime(2018, 10, 30), date_fin_avec_equipe = null },
                 new equipe_joueurBd { no_equipe = 4, no_joueur = 12, no_dossard = 34, date_debut_avec_equipe = new DateTime(2011, 9, 10), date_fin_avec_equipe = null },
                 new equipe_joueurBd { no_equipe = 4, no_joueur = 13, no_dossard = 35, date_debut_avec_equipe = new DateTime(2012, 8, 20), date_fin_avec_equipe = null }
-                );*/
+                );
 
             modelBuilder.Entity<StatsJoueurBd>()
                 .HasKey(d => new { d.No_JoueurRefId, d.AnneeStats });
 
-            /*modelBuilder.Entity<StatsJoueurBd>()
+            modelBuilder.Entity<StatsJoueurBd>()
                 .HasData(
                 new StatsJoueurBd { No_JoueurRefId = 1, AnneeStats = 2020, NbButs = 10, NbPasses = 20, NbPoints = 30, NbPartiesJouees = 25, NbMinutesPenalites = 15, PlusseMoins = 5, ButsAlloues = 0, TirsAlloues = 0, Victoires = 0, Defaites = 0, DefaitesEnProlongation = 0, Nulles = 0, MinutesJouees = 500 },
                 new StatsJoueurBd { No_JoueurRefId = 2, AnneeStats = 2020, NbButs = 15, NbPasses = 10, NbPoints = 25, NbPartiesJouees = 25, NbMinutesPenalites = 51, PlusseMoins = -2, ButsAlloues = 0, TirsAlloues = 0, Victoires = 0, Defaites = 0, DefaitesEnProlongation = 0, Nulles = 0, MinutesJouees = 500 },
@@ -109,7 +110,7 @@ namespace ServiceLigueHockey.Data
                 new StatsJoueurBd { No_JoueurRefId = 2, AnneeStats = 2018, NbButs = 1815, NbPasses = 10, NbPoints = 1825, NbPartiesJouees = 65, NbMinutesPenalites = 51, PlusseMoins = -2, ButsAlloues = 0, TirsAlloues = 0, Victoires = 0, Defaites = 0, DefaitesEnProlongation = 0, Nulles = 0, MinutesJouees = 500 },
                 new StatsJoueurBd { No_JoueurRefId = 3, AnneeStats = 2018, NbButs = 1805, NbPasses = 24, NbPoints = 1829, NbPartiesJouees = 65, NbMinutesPenalites = 35, PlusseMoins = 25, ButsAlloues = 0, TirsAlloues = 0, Victoires = 0, Defaites = 0, DefaitesEnProlongation = 0, Nulles = 0, MinutesJouees = 500 },
                 new StatsJoueurBd { No_JoueurRefId = 4, AnneeStats = 2018, NbButs = 1800, NbPasses = 0, NbPoints = 1800, NbPartiesJouees = 65, NbMinutesPenalites = 4, PlusseMoins = 0, ButsAlloues = 53, TirsAlloues = 564, Victoires = 9, Defaites = 2, DefaitesEnProlongation = 6, Nulles = 0, MinutesJouees = 1500 }
-                );*/
+                );
         }
     }
 }

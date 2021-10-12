@@ -27,12 +27,23 @@ namespace ServiceLigueHockey
                 options.AddPolicy(name: monAllowSpecificOrigine,
                     builder => {
                         builder.WithOrigins("http://localhost:4900", "https://localhost:4900");
+                        builder.WithHeaders("Content-Type");
+                        builder.WithMethods("POST","GET","PUT","OPTIONS");
                     });
             });
+            /*services.AddCors(options => {
+                options.AddPolicy(name: monAllowSpecificOrigine,
+                    builder => {
+                        builder
+                        .WithOrigins("http://localhost:4900", "https://localhost:4900")
+                        .WithHeaders("Content-Type")
+                        .WithMethods("POST","GET","PUT","OPTIONS");
+                    });
+            });*/
 
             services.AddControllers();
 
-            var connection = Configuration.GetConnectionString("ServiceLigueHockeyContext");
+            var connection = Configuration.GetConnectionString("ServiceLigueHockeyContext2");
             services.AddDbContext<ServiceLigueHockeyContext>(options =>
                     options.UseSqlServer(connection));
             /*var connection = Configuration.GetConnectionString("ServiceLigueHockeyContextDb2");

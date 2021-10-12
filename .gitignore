@@ -13,3 +13,4 @@ ServiceLigueHockey/obj/*
 ServiceLigueHockey/obj/Debug/net5.0/*
 TestServices/bin/*
 TestServices/obj/*
+ServiceLigueHockey/*.bck

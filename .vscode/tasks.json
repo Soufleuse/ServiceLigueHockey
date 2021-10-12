@@ -2,8 +2,14 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Montres-moi le PATH",
+            "command": "echo $PATH",
+            "type": "shell",
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "build",
-            "command": "dotnet",
+            "command": "/home/lemste/dotnet/dotnet",
             "type": "process",
             "args": [
                 "build",
