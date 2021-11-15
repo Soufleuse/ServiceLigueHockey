@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ServiceLigueHockey.Data;
+using Serilog;
 
 namespace ServiceLigueHockey
 {
@@ -58,6 +59,8 @@ namespace ServiceLigueHockey
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSerilogRequestLogging();
 
             app.UseHttpsRedirection();
 

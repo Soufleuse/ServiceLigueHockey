@@ -62,6 +62,8 @@ namespace ServiceLigueHockey.Controllers
         [HttpGet("{noJoueur}/{anneeStats}")]
         public ActionResult<StatsJoueurDto> GetStatsJoueurBd(int noJoueur, short anneeStats)
         {
+            Serilog.Log.Information("Entrée dans /api/StatsJoueurBds/noJoueur/anneeStats");
+
             var retour = _context.StatsJoueurBd
                 .Where(x => x.No_JoueurRefId == noJoueur && x.AnneeStats == anneeStats)
                 .Select(statsJoueurBd => new StatsJoueurDto
